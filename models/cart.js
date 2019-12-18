@@ -15,11 +15,11 @@ module.exports = class Cart {
       let updatedProduct;
       if (existingProduct) {
         updatedProduct = {...existingProduct};
-        updatedProduct.gty = updatedProduct.gty++;
+        updatedProduct.qty = updatedProduct.qty + 1;
         cart.products = [...cart.products];
         cart.products[existingProductIndex] = updatedProduct;
       } else {
-        updatedProduct = { id: id, gty: 1 };
+        updatedProduct = { id: id, qty: 1 };
         cart.products = [...cart.products, updatedProduct];
       }
       cart.totalPrice = cart.totalPrice + +productPrice;
@@ -44,4 +44,16 @@ module.exports = class Cart {
       })
     });
   }
+
+  static getCart(callback) {
+    fs.readFile(pathFile, (err, fileContent) => {
+      const cart = JSON.parse(fileContent)
+      if (err) {
+        callback(null)
+      } else {
+        callback(cart)
+      }
+    })
+  }
+
 };
