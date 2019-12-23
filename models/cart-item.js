@@ -8,7 +8,7 @@ const CartItem = sequlize.define('cartItem', {
     allowNull: false,
     primaryKey: true
   },
-  quanity: Sequlize.INTEGER
+  quantity: Sequlize.INTEGER
 });
 
 module.exports = CartItem;
